@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddComponent implements OnInit {
 
-  constructor() { }
+  myForm = this.fb.group({
+    name: ['', Validators.required],
+  });
+
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  hasError(field: string): boolean {
+    return this.myForm.get(field)?.invalid && this.myForm.get(field)?.touched || false;
   }
 
 }

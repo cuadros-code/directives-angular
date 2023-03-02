@@ -2,17 +2,30 @@
 <h1 class="mt-5">Add Product</h1>
 <hr>
 
-<form >
+<form 
+  [formGroup]="myForm"
+  autocomplete="off"
+>
   <div class="row g-3 align-items-center mb-3">
     <div class="col-auto">
       <label for="name" class="col-form-label">Name:</label>
     </div>
 
     <div class="col-auto">
-      <input type="text" class="form-control" id="name" placeholder="Enter name">
+      <input 
+        id="name" 
+        formControlName="name"
+        type="text" 
+        class="form-control" 
+        placeholder="Enter name"
+      >
     </div>
 
-    <div class="col-auto">
+    <div 
+      class="col-auto"
+      *ngIf="hasError('name')"
+      error-msg
+    >
       <span class="form-text">This field is required</span>
     </div>
 
@@ -31,3 +44,11 @@
 <h3 class="mt-5">
   Form
 </h3>
+
+Value:<pre>{{ myForm.value | json }}</pre>
+
+Status:<pre>{{ myForm.status | json }}</pre>
+
+Valid:<pre>{{ myForm.valid | json }}</pre>
+
+
