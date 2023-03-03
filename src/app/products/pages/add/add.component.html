@@ -21,12 +21,15 @@
       >
     </div>
 
-    <div 
-      class="col-auto"
-      *ngIf="hasError('name')"
-      error-msg
-    >
-      <span>This field is required</span>
+    <div class="col-auto">
+      <span
+        class="form-text"
+        error-msg
+        color="red"
+        alertMessage="This field is required"
+        *ngIf="hasError('name')"
+      >
+      </span>
     </div>
 
   </div>
@@ -45,7 +48,7 @@
   Form
 </h3>
 
-Value:<pre>{{ myForm.value | json }}</pre>
+Value:<pre >{{ myForm.value | json }}</pre>
 
 Status:<pre>{{ myForm.status | json }}</pre>
 
