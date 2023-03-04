@@ -60,4 +60,11 @@ Status:<pre>{{ myForm.status | json }}</pre>
 
 Valid:<pre>{{ myForm.valid | json }}</pre>
 
-
+<div 
+  class="col"
+  *customIf="myForm.valid"
+>
+  <div class="row alert alert-info">
+    Todo OK
+  </div>
+</div>
