@@ -27,8 +27,8 @@
         error-msg
         [color]="color"
         [alertMessage]="message"
-        *ngIf="hasError('name')"
-      >
+        [invalid]="hasError('name')"
+        >
       </span>
     </div>
 

@@ -7,6 +7,9 @@ export class ErrorMsgDirective implements OnInit, OnChanges {
 
   htmlElement: ElementRef<HTMLElement>;
 
+  private _color: string = 'red';
+  private _message: string = 'default text';
+
   /**
    * SE AGREGA UN SET EN EL INPUT PARA QUE LA PROPIEDAD
    * PUEDA SER REACTIVA A LOS CAMBIOS DESDE EL HOST
@@ -15,11 +18,19 @@ export class ErrorMsgDirective implements OnInit, OnChanges {
   // @Input() color: string = 'red';
   @Input() set color( value: string ){
     this.htmlElement.nativeElement.style.color = value;
+    this._color = value;
   }
 
   // @Input() alertMessage = 'required';
   @Input() set alertMessage( message: string ) {
     this.htmlElement.nativeElement.innerText = message;
+    this._message = message;
+  }
+
+  @Input() set invalid( value: boolean ){
+    value
+    ? this.htmlElement.nativeElement.classList.remove('hidden')
+    : this.htmlElement.nativeElement.classList.add('hidden')
   }
 
   constructor(
@@ -34,8 +45,8 @@ export class ErrorMsgDirective implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    // this.setColor();
-    // this.setMessage();
+    this.htmlElement.nativeElement.style.color = this._color;
+    this.htmlElement.nativeElement.innerText = this._message;
   }
 
   // setColor(): void {
