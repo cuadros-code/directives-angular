@@ -1,0 +1,17 @@
+<div class="animatedContainer">
+    <img
+      class="img"
+      [@productImg]="divState"
+      [src]="bannerImages[indexActive].product"
+    />
+    <div 
+      class="upPart" 
+      [@upImg]="divState"
+      [style.background]="'linear-gradient(90deg, ' + bannerImages[indexActive].upPart + ', transparent 100%)'"
+    ></div>
+    <div
+      class="downPart"
+      [@downImg]="divState"
+      [style.background]="'linear-gradient(90deg, ' + bannerImages[indexActive].downPart + ', transparent 100%)'"
+    ></div>
+</div>
