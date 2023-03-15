@@ -1,13 +1,12 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { 
-  AnimationBuilder, 
+import {
   style, 
   transition, 
   trigger,
   state,
   animate } from '@angular/animations';
-import { interval, Observable, Subscription } from 'rxjs';
-
+import { interval, Subscription } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 @Component({
   selector: 'app-animation',
   templateUrl: './animation.component.html',
@@ -87,6 +86,80 @@ import { interval, Observable, Subscription } from 'rxjs';
       ])
     ]),
 
+    trigger('upImgSmall', [
+      state('in', style({
+        width: '80%',
+        opacity: 1
+      })),
+      state('out', style({
+        width: '10%',
+        opacity: 0
+      })),
+      transition(':enter', [
+        style({ width: '0%', opacity: 0 }),
+        animate('0.7s', style({ width: '40%', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ width: '40%', opacity: 1 }),
+        animate('0.7s', style({ width: '0%', opacity: 0 }))
+      ]),
+      transition('in => out', [
+        animate('0.7s')
+      ]),
+      transition('out => in', [
+        animate('0.7s')
+      ])
+    ]),
+
+    trigger('downImgSmall', [
+      state('in', style({
+        width: '90%',
+        opacity: 1
+      })),
+      state('out', style({
+        width: '10%',
+        opacity: 0
+      })),
+      transition(':enter', [
+        style({ width: '00%', opacity: 0 }),
+        animate('0.7s', style({ width: '50%', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ width: '50%', opacity: 1 }),
+        animate('0.7s', style({ width: '0%', opacity: 0 }))
+      ]),
+      transition('in => out', [
+        animate('0.7s')
+      ]),
+      transition('out => in', [
+        animate('0.7s')
+      ])
+    ]),
+
+    trigger('productImgSmall', [
+      state('in', style({
+        opacity: 1
+      })),
+      state('out', style({
+        opacity: 0,
+        transform: 'translateX(50%)'
+      })),
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('0.8s', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ opacity: 1 }),
+        animate('0.8s', style({ opacity: 0 }))
+      ]),
+      transition('in => out', [
+        animate('0.8s')
+      ]),
+      transition('out => in', [
+        animate('0.8s')
+      ])
+    ]),
+
   ]
 
 })
@@ -97,7 +170,9 @@ export class AnimationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   bannerInterval!: Subscription;
   activeInterval!: any;
-  
+  screenWidth!: number;
+  isMobile!: boolean;
+
   bannerImages = [
     {
       upPart: '#9747ff',
@@ -121,10 +196,19 @@ export class AnimationComponent implements OnInit, AfterViewInit, OnDestroy {
     },
   ]
 
-  constructor() { }
+  constructor(private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
     this.divState = 'in';
+
+    const layoutChanges = this.breakpointObserver.observe([
+      Breakpoints.XSmall,
+    ]);
+    
+    layoutChanges.subscribe(result => {
+      this.isMobile = result.matches;
+    });
+
   }
   
   ngAfterViewInit(): void {

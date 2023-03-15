@@ -32,3 +32,33 @@
   float: right;
   bottom: 30%;
 }
+
+
+.imgSmall {
+  position: absolute;
+  top: 35%;
+  right: 40%;
+  width: 150px;
+  height: 300px;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.upPartSmall {
+  height: 100px;
+  border-bottom-left-radius: 100px;
+  border-top-left-radius: 100px;
+  position: absolute;
+  right: 0;
+  bottom: 40%;
+}
+
+.downPartSmall {
+  height: 100px;
+  border-bottom-left-radius: 100px;
+  border-top-left-radius: 100px;
+  position: absolute; 
+  right: 0;
+  float: right;
+  bottom: 30%;
+}
